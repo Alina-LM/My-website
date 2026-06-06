@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SkyBound·探索者</title>
+    <style>
+        /* 全局样式 */
+        body {
+            margin: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f4f4f4; /* 柔和浅灰 */
+            color: #333;
+            line-height: 1.6;
+        }
+
+        /* 导航栏样式 */
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 2rem;
+            background-color: rgba(255, 255, 255, 0.8); /* 半透明背景 */
+            backdrop-filter: blur(10px); /* 毛玻璃效果 */
+            -webkit-backdrop-filter: blur(10px); /* Safari支持 */
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            left: 0;
+            z-index: 1000;
+            box-sizing: border-box; /* 确保内边距不撑开宽度 */
+        }
+
+        .navbar .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #333;
+            text-decoration: none;
+        }
+
+        .navbar .nav-links {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+        }
+
+        .navbar .nav-links li {
+            margin: 0 1rem;
+        }
+
+        .navbar .nav-links a {
+            color: #555;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        .navbar .nav-links a:hover {
+            color: #007bff; /* 蓝色高亮 */
+        }
+
+        .navbar .contact-button {
+            background: linear-gradient(45deg, #007bff, #00c6ff); /* 渐变色 */
+            color: white;
+            padding: 0.5rem 1.2rem;
+            border: none;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            box-shadow: 0 4px 10px rgba(0, 123, 255, 0.3);
+        }
+
+        .navbar .contact-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 15px rgba(0, 123, 255, 0.4);
+        }
+
+        /* Hero Section 欢迎区域 */
+        .hero-section {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh; /* 确保全屏高度 */
+            text-align: center;
+            background-color: #e0e0e0; /* 柔和背景色 */
+            color: #333;
+            padding-top: 60px; /* 避免被固定导航栏遮挡 */
+        }
+
+        .hero-section h1 {
+            font-size: 3rem;
+            margin: 0;
+            color: #222;
+        }
+
+        /* 响应式设计 */
+        @media (max-width: 768px) {
+            .navbar {
+                flex-wrap: wrap;
+                justify-content: center;
+                padding: 1rem;
+            }
+
+            .navbar .logo {
+                width: 100%;
+                text-align: center;
+                margin-bottom: 1rem;
+            }
+
+            .navbar .nav-links {
+                flex-direction: column;
+                width: 100%;
+                text-align: center;
+            }
+
+            .navbar .nav-links li {
+                margin: 0.5rem 0;
+            }
+
+            .navbar .contact-button {
+                width: 100%;
+                margin-top: 1rem;
+            }
+
+            .hero-section h1 {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <a href="#" class="logo">SkyBound·探索者</a>
+        <ul class="nav-links">
+            <li><a href="#">首页</a></li>
+            <li><a href="#">关于我</a></li>
+            <li><a href="#">我的项目</a></li>
+            <li><a href="#">学习记录</a></li>
+        </ul>
+        <a href="#" class="contact-button">联系我</a>
+    </nav>
+
+    <section class="hero-section">
+        <h1>欢迎来到我的个人网站</h1>
+    </section>
+</body>
+</html>
