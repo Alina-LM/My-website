@@ -6,12 +6,48 @@
     <title>SkyBound·探索者</title>
     <style>
         /* 全局样式 */
+        :root {
+            --morandi-pink: #e0b0d0; /* 莫兰迪粉 */
+            --mysterious-purple: #8e44ad; /* 神秘紫 */
+            --tech-blue: #3498db; /* 科技蓝 */
+            --gradient-color-1: #e0b0d0;
+            --gradient-color-2: #8e44ad;
+            --gradient-color-3: #3498db;
+            --gradient-color-4: #a8edea; /* 浅蓝色，用于更丰富的渐变 */
+            --gradient-color-5: #fed6e3; /* 浅粉色，用于更丰富的渐变 */
+        }
+
         body {
             margin: 0;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: #f4f4f4; /* 柔和浅灰 */
-            color: #333;
+            color: #eee; /* 适应深色背景 */
             line-height: 1.6;
+            /* 梦幻动态背景 */
+            background: linear-gradient(135deg, var(--gradient-color-1), var(--gradient-color-2), var(--gradient-color-3), var(--gradient-color-4), var(--gradient-color-5));
+            background-size: 400% 400%; /* 放大背景尺寸以实现流动效果 */
+            animation: gradientAnimation 15s ease infinite; /* 15秒丝滑自循环流动 */
+            min-height: 100vh;
+            overflow-x: hidden; /* 防止横向滚动条 */
+        }
+
+        @keyframes gradientAnimation {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        /* 呼吸灯动画 */
+        @keyframes pulse {
+            0% { transform: scale(1); opacity: 1; }
+            50% { transform: scale(1.02); opacity: 0.9; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+
+        /* 上下浮动动画 */
+        @keyframes floatingAnimation {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-5px); } /* 极轻微的上下悬浮动效 */
+            100% { transform: translateY(0px); }
         }
 
         /* 导航栏样式 */
@@ -20,23 +56,31 @@
             justify-content: space-between;
             align-items: center;
             padding: 1rem 2rem;
-            background-color: rgba(255, 255, 255, 0.8); /* 半透明背景 */
+            background-color: rgba(0, 0, 0, 0.4); /* 更深的半透明背景 */
             backdrop-filter: blur(10px); /* 毛玻璃效果 */
             -webkit-backdrop-filter: blur(10px); /* Safari支持 */
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.2);
             position: fixed;
             width: 100%;
             top: 0;
             left: 0;
             z-index: 1000;
-            box-sizing: border-box; /* 确保内边距不撑开宽度 */
+            box-sizing: border-box;
         }
 
         .navbar .logo {
-            font-size: 1.5rem;
+            font-size: 1.8rem;
             font-weight: bold;
-            color: #333;
             text-decoration: none;
+            background: linear-gradient(45deg, var(--gradient-color-4), var(--gradient-color-5)); /* 字体渐变色 */
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            color: transparent; /* Fallback */
+            text-shadow: 0 0 10px rgba(168, 237, 234, 0.9), 0 0 20px rgba(254, 214, 227, 0.7), 0 0 30px rgba(168, 237, 234, 0.5); /* 更强的发光 */
+            animation: pulse 2s infinite alternate; /* 呼吸动画 */
+            position: relative;
+            z-index: 1;
         }
 
         .navbar .nav-links {
@@ -51,49 +95,98 @@
         }
 
         .navbar .nav-links a {
-            color: #555;
+            color: #ffffff; /* 更亮的白色 */
+            text-shadow: 0 0 5px rgba(255, 255, 255, 0.3);
             text-decoration: none;
             font-weight: 500;
-            transition: color 0.3s ease;
+            transition: color 0.3s ease, text-shadow 0.3s ease;
         }
 
         .navbar .nav-links a:hover {
-            color: #007bff; /* 蓝色高亮 */
+            color: #ffffff;
+            text-shadow: 0 0 5px rgba(255, 255, 255, 0.5);
         }
 
         .navbar .contact-button {
-            background: linear-gradient(45deg, #007bff, #00c6ff); /* 渐变色 */
+            background: linear-gradient(45deg, #00c6ff, #007bff); /* 渐变色 */
             color: white;
-            padding: 0.5rem 1.2rem;
+            padding: 0.6rem 1.5rem;
             border: none;
-            border-radius: 25px;
+            border-radius: 30px;
             text-decoration: none;
             font-weight: 600;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            box-shadow: 0 4px 10px rgba(0, 123, 255, 0.3);
+            transition: all 0.4s ease;
+            box-shadow: 0 4px 15px rgba(0, 198, 255, 0.4);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .navbar .contact-button:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            transition: all 0.6s ease;
+        }
+
+        .navbar .contact-button:hover:before {
+            left: 100%;
         }
 
         .navbar .contact-button:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 15px rgba(0, 123, 255, 0.4);
+            transform: translateY(-3px) scale(1.05);
+            box-shadow: 0 8px 25px rgba(0, 198, 255, 0.7);
         }
 
         /* Hero Section 欢迎区域 */
         .hero-section {
             display: flex;
+            flex-direction: column; /* Arrange items vertically */
             justify-content: center;
             align-items: center;
-            min-height: 100vh; /* 确保全屏高度 */
+            min-height: calc(100vh - 60px); /* 减去导航栏高度 */
             text-align: center;
-            background-color: #e0e0e0; /* 柔和背景色 */
-            color: #333;
-            padding-top: 60px; /* 避免被固定导航栏遮挡 */
+            color: #eee;
+            padding-top: 60px;
+            position: relative; /* For absolute positioning of canvas */
+            overflow: hidden; /* To contain particles */
         }
 
-        .hero-section h1 {
-            font-size: 3rem;
-            margin: 0;
-            color: #222;
+        #particleContainer {
+            width: 100%; /* Will be set dynamically by JS for text */
+            height: 200px; /* Initial height, will be set dynamically by JS */
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 1rem; /* Space between canvas and subtitle */
+        }
+
+        #particleCanvas {
+            display: block;
+            background-color: transparent;
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+        .subtitle-text {
+            font-size: 2.2rem; /* Adjusted font size */
+            margin: 0; /* Reset margin */
+            background: linear-gradient(45deg, #ffe8e2, #b0c4de); /* 字体渐变色 */
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            color: transparent; /* Fallback */
+            text-shadow: 0 0 10px rgba(255, 232, 226, 0.8), 0 0 20px rgba(176, 196, 222, 0.6); /* Slightly less intense glow for subtitle */
+            animation: floatingAnimation 3s ease-in-out infinite alternate; /* Floating animation */
+            position: relative;
+            z-index: 1; /* Bring subtitle to front */
         }
 
         /* 响应式设计 */
@@ -125,8 +218,8 @@
                 margin-top: 1rem;
             }
 
-            .hero-section h1 {
-                font-size: 2rem;
+            .subtitle-text {
+                font-size: 1.8rem;
             }
         }
     </style>
@@ -144,7 +237,173 @@
     </nav>
 
     <section class="hero-section">
-        <h1>欢迎来到我的个人网站</h1>
+        <div id="particleContainer">
+            <canvas id="particleCanvas"></canvas>
+        </div>
+        <h2 class="subtitle-text">欢迎来到我的个人网站</h2>
     </section>
+
+    <script>
+        const canvas = document.getElementById('particleCanvas');
+        const ctx = canvas.getContext('2d');
+        const particleContainer = document.getElementById('particleContainer');
+
+        let particles = [];
+        const text = "SkyBound";
+        const font = "bold 80px Arial";
+        const particleSize = 2;
+        const particleGap = 3; // Gap between sampled pixels
+        const mouseRadius = 70;
+        const repulsionForce = 8; // How strongly particles are pushed away
+        const attractionForce = 0.05; // How strongly particles return to original position
+        const maxSpeed = 5;
+
+        let mouse = {
+            x: null,
+            y: null,
+            radius: mouseRadius
+        };
+
+        // Resize canvas and regenerate particles on window resize
+        window.addEventListener('resize', () => {
+            resizeCanvas();
+            generateParticles(text, font, canvas, ctx);
+        });
+
+        canvas.addEventListener('mousemove', (event) => {
+            const rect = canvas.getBoundingClientRect();
+            mouse.x = event.clientX - rect.left;
+            mouse.y = event.clientY - rect.top;
+        });
+
+        canvas.addEventListener('mouseleave', () => {
+            mouse.x = undefined;
+            mouse.y = undefined;
+        });
+
+        class Particle {
+            constructor(x, y, color) {
+                this.x = x;
+                this.y = y;
+                this.baseX = x;
+                this.baseY = y;
+                this.size = particleSize + Math.random() * 1;
+                this.color = color;
+                this.density = (Math.random() * 30) + 1; // For varying movement speed
+                this.vx = 0;
+                this.vy = 0;
+            }
+
+            draw() {
+                ctx.fillStyle = this.color;
+                ctx.shadowBlur = 5;
+                ctx.shadowColor = this.color;
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                ctx.closePath();
+                ctx.fill();
+            }
+
+            update() {
+                // Mouse interaction
+                let dxMouse = mouse.x - this.x;
+                let dyMouse = mouse.y - this.y;
+                let distance = Math.sqrt(dxMouse * dxMouse + dyMouse * dyMouse);
+                let forceDirectionX = dxMouse / distance;
+                let forceDirectionY = dyMouse / distance;
+                let force = (mouse.radius - distance) / mouse.radius;
+                let directionX = forceDirectionX * force * this.density * repulsionForce;
+                let directionY = forceDirectionY * force * this.density * repulsionForce;
+
+                if (distance < mouse.radius) {
+                    this.vx -= directionX;
+                    this.vy -= directionY;
+                } else {
+                    // Return to original position
+                    if (this.x !== this.baseX) {
+                        let dx = this.x - this.baseX;
+                        this.vx -= dx * attractionForce;
+                    }
+                    if (this.y !== this.baseY) {
+                        let dy = this.y - this.baseY;
+                        this.vy -= dy * attractionForce;
+                    }
+                }
+
+                // Apply velocity and dampen it
+                this.x += this.vx;
+                this.y += this.vy;
+                this.vx *= 0.95;
+                this.vy *= 0.95;
+
+                // Limit speed
+                if (Math.abs(this.vx) > maxSpeed) this.vx = Math.sign(this.vx) * maxSpeed;
+                if (Math.abs(this.vy) > maxSpeed) this.vy = Math.sign(this.vy) * maxSpeed;
+            }
+        }
+
+        function resizeCanvas() {
+            canvas.width = particleContainer.offsetWidth;
+            canvas.height = particleContainer.offsetHeight;
+        }
+
+        function generateParticles(text, font, canvas, ctx) {
+            particles = []; // Clear existing particles
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            ctx.font = font;
+            ctx.textAlign = 'center';
+            ctx.textBaseline = 'middle';
+            ctx.fillStyle = 'white'; // Temporarily draw text to get pixel data
+
+            // Measure text to center it
+            const textMetrics = ctx.measureText(text);
+            const textWidth = textMetrics.width;
+            const textHeight = textMetrics.actualBoundingBoxAscent + textMetrics.actualBoundingBoxDescent;
+
+            const startX = (canvas.width - textWidth) / 2;
+            const startY = (canvas.height - textHeight) / 2 + textMetrics.actualBoundingBoxAscent;
+
+            ctx.fillText(text, canvas.width / 2, canvas.height / 2);
+
+            const pixels = ctx.getImageData(0, 0, canvas.width, canvas.height).data;
+            ctx.clearRect(0, 0, canvas.width, canvas.height); // Clear the temporary text
+
+            for (let y = 0; y < canvas.height; y += particleGap) {
+                for (let x = 0; x < canvas.width; x += particleGap) {
+                    const index = (y * canvas.width + x) * 4;
+                    const alpha = pixels[index + 3];
+                    if (alpha > 0) { // If it's a visible pixel from the text
+                        const r = pixels[index];
+                        const g = pixels[index + 1];
+                        const b = pixels[index + 2];
+                        // Use a fixed glowing color or derive from original pixel (if text had gradient initially)
+                        // For simplicity, let's use a dynamic glowing effect based on position or a fixed set.
+                        // Here, I'll use a slightly random color from the morandi/tech palette for each particle
+                        const colors = [
+                            `hsl(${Math.random() * 30 + 330}, 80%, 70%)`, // Pinkish
+                            `hsl(${Math.random() * 30 + 250}, 80%, 60%)`, // Purplish
+                            `hsl(${Math.random() * 30 + 200}, 80%, 70%)`  // Bluish
+                        ];
+                        const randomColor = colors[Math.floor(Math.random() * colors.length)];
+                        particles.push(new Particle(x, y, randomColor));
+                    }
+                }
+            }
+        }
+
+        function animate() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            for (let i = 0; i < particles.length; i++) {
+                particles[i].update();
+                particles[i].draw();
+            }
+            requestAnimationFrame(animate);
+        }
+
+        // Initial setup
+        resizeCanvas();
+        generateParticles(text, font, canvas, ctx);
+        animate();
+    </script>
 </body>
 </html>
